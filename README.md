@@ -1,4 +1,4 @@
-# Movie_Reservation_System
+# Movie Reservation System
 
 ## Challenge Objective:
 Build a simple RESTful API using Node.js, Express.js, and MongoDB to manage a movie reservation system.
