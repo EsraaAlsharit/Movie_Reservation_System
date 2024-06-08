@@ -1,0 +1,11 @@
+## get all movies with timeslot availabe
+get http://localhost:8000/api/movie/all
+
+## create movie 
+post http://localhost:8000/api/movie/create 
+{
+    "timeSlot": "2024-06-13 11:20:00"
+}
+
+## retrive movies
+get http://localhost:8000/api/movie/create 
