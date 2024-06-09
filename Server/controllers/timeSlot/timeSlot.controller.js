@@ -29,7 +29,7 @@ const signMovie = async (req, res, next) => {
     }
 }
 
-//retrieve all timeSlots with time slots
+//reserve timeSlots with time slots
 const reserveTimeSlot = async (req, res, next) => {
     try {
         const { timeSlotId, chairs } = req.body
@@ -54,9 +54,8 @@ const reserveTimeSlot = async (req, res, next) => {
 }
 const CheckAvailabilityTimeSlot = async (req, res, next) => {
     try {
-        const { timeSlotId } = req.body
-
-
+        const { timeSlotId } = req.query
+        console.log(req);
         const Slot = await timeSlotModel.findById(timeSlotId)
 
         res.json({ message: 'time slot retrieve successfully!', status: 200, docs: Slot })

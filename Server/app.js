@@ -3,7 +3,6 @@ const express = require("express");
 const cors = require("cors");
 // const passport = require("passport");
 const swaggerUI = require("swagger-ui-express");
-const swaggerjsdoc = require("swagger-jsdoc");
 // require("./config/passport");
 // const { session } = require("./config/session");
 const origin = require("./config/corsOrigin");
@@ -45,24 +44,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', apiRouter)
 
 //to use the docs in the app
-// const swaggerSpec = swaggerjsdoc(options)
-// app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(openApiJson));
 
 
 
-/**
- * 
- * @swagger
- * /api/movie/create:
- * post:
- *      summary: this api is used to check
- *      description: this api 
- *      responses:
- *          200:
- *              description: to test 
- * 
- */
 
 //use the errorHandler to catch errors related to routes.
 app.use(errorHandler);

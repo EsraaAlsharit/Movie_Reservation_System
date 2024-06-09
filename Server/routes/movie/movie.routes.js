@@ -7,13 +7,13 @@ const movieRouter = Router()
 /**
  * 
  * @swagger
- * /api/movie/create:
+ * api/movie/create:
  * post:
- *      summary: this api is used to check
  *      description: this api 
  *      responses:
- *          201:
- *              description: to test 
+ *          '201':
+ *              description: Movie created successfully!
+
  * 
  */
 movieRouter.post('/create', createmovie)

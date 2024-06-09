@@ -1,22 +1,8 @@
 
 
-// const options = {
-//     definition: {
-//         openapi: "3.0.0",
-//         info: {
-//             title: "Movie Reservation System APIs",
-//             version: "1.0.0"
-//         },
-//         servers: [
-//             { url: "http://localhost:8000" }
-//         ]
-//     },
-//     apis: ["./routes/api.routes.js"]
-    
-// }
-
 const { OpenApi } = require('ts-openapi')
-const { createMoviePath, getAllMoviesPath } = require('./movie/moviePath')
+const { createMoviePath, getAllMoviesPath, getAllMoviesTimeSlotPath } = require('./movie/moviePath')
+const { createTimeSlotPath, reserveTimeSlotPath, getAllTimeSlotPath, updateTimeSlotPath } = require('./timeSlot/timeSlotPath')
 
 const openApi = new OpenApi(
     "Beta 0.1",
@@ -28,11 +14,15 @@ const openApi = new OpenApi(
 openApi.setServers([
     { url: "http://localhost:8000" }
 ])
-
+//movie
 openApi.addPath('/api/movie/create', createMoviePath(openApi), true)
-
-openApi.addPath('/api/movie/retrieve', getAllMoviesPath(openApi), true)
-// openApi.addPath('/api/movie/all', getAllMoviesPath(openApi), true)
+openApi.addPath('/api/movie/all', getAllMoviesPath(openApi), true)
+openApi.addPath('/api/movie/retrieve', getAllMoviesTimeSlotPath(openApi), true)
+//timeslot
+openApi.addPath('/api/timeSlot/create', createTimeSlotPath(openApi), true)
+openApi.addPath('/api/timeSlot/retrieve', getAllTimeSlotPath(openApi), true)
+openApi.addPath('/api/timeSlot/update', updateTimeSlotPath(openApi), true)
+openApi.addPath('/api/timeSlot/reserve', reserveTimeSlotPath(openApi), true)
 
 module.exports = {
     openApiJson: openApi.generateJson()

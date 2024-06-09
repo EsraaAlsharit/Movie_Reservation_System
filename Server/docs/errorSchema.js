@@ -29,7 +29,8 @@ const successfulCreationResponse = (schema, type) => {
                 default: 201
             }),
             docs: schema
-        }
+        },
+        
     })
     return responseSchema
 }

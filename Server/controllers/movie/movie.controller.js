@@ -15,18 +15,7 @@ const createmovie = async (req, res, next) => {
         next(error)
     }
 }
-/**
- * 
- * @swagger
- * /:
- * get:
- *      summary: this api is used to check
- *      description: this api 
- *      responses:
- *          200:
- *              description: to test 
- * 
- */
+
 const retrieveAllmovies = async (req, res, next) => {
     try {
         const allMovies = await movieModel.find()
@@ -72,7 +61,7 @@ const retrieveAllmoviesTimeSlot = async (req, res, next) => {
             { $sort: { _id: -1 } }
         ]
         const allMovies = await movieModel.aggregate(pipelines)
-        res.json({ message: 'All movies retrieved successfully!', status: 200, docs: allMovies })
+        res.json({ message: 'All movies with time slot retrieved successfully!', status: 200, docs: allMovies })
     } catch (error) {
         next(error)
     }
