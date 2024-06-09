@@ -1,45 +1,58 @@
 const { Types } = require('ts-openapi')
 
-
-//Body request of creating a new movie
-const movieBody = Types.Object({
+const TimeSlotBody = Types.Object({
     description: 'Request body of create movie',
     properties: {
-        timeSlot: Types.Date({
+        timeSlot: Types.String({
             description: 'The timeSlot of the movie',
             required: true,
-            example: "09-06-2024",
+            example: { timeSlot: "12-06-2024 07:45:00" }
         }),
         capacity: Types.Integer({
             description: 'The capacity movie',
             required: true,
-            example: 20,
+            example: { capacity: 20 },
         }),
         movieId: Types.String({
             description: "Movie ID",
-            example: "6663af45862c4159526a5b13",
+            example: { movieId: "6663af45862c4159526a5b13" }
         }),
     },
+    example: {
+        timeSlot: "12-06-2024 07:45:00", capacity: 30,
+        //  movieId: "6663af45862c4159526a5b13"
+    }
 
 })
 
-//TimeSlot object schema
 const singleTimeSlotSchema = Types.Object({
     description: 'TimeSlot object',
     properties: {
-        _id: Types.String({ description: "TimeSlot ID" }),
-        timeSlot: Types.Date({
-            description: 'The title of the movie',
+        _id: Types.Uuid({ description: "TimeSlot ID" }),
+        timeSlot: Types.DateTime({
+            description: 'The time slot for the movie',
+            default: new Date("12-06-2024 07:45:00"),
+            example: new Date("12-06-2024 07:45:00")
         }),
         capacity: Types.Integer({
-            description: 'The title of the movie',
+            description: 'The capacity of the time slot',
+            default: 20,
+            example: 20
         }),
-        movieId: Types.Uuid({ description: "TimeSlot ID" }),
+        movieId: Types.Uuid({
+            description: "TimeSlot ID",
+            default: "6663af45862c4159526a5b13",
+            example: "6663af45862c4159526a5b13"
+
+        }),
+    },
+    example: {
+        timeSlot: new Date("12-06-2024 07:45:00"), capacity: 30,
+        movieId: Types.Uuid("6663af45862c4159526a5b13")
     }
 })
 
-
 module.exports = {
-    movieBody,
+    TimeSlotBody,
     singleTimeSlotSchema
 }

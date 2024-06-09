@@ -1,9 +1,7 @@
-const { errorSchema, successfulCreationResponse, successfulRetrieveResponse } = require('../errorSchema')
+const { errorSchema, successfulCreationResponse, successfulRetrieveResponse, successfulUpdateResponse } = require('../responseSchema')
 const { TimeSlotBody, singleTimeSlotSchema } = require('./timeSlotSchema')
 const { Types } = require('ts-openapi')
 
-//
-//create TimeSlot path
 const createTimeSlotPath = (openApi) => {
     return {
         post: {
@@ -22,90 +20,113 @@ const createTimeSlotPath = (openApi) => {
     }
 }
 
-//Get all projcts path
 const reserveTimeSlotPath = (openApi) => {
     return {
-        patch: {
-            summary: 'Get All TimeSlots',
-            description: 'This operation will reserve time Slot for movie',
-            operationId: 'reserve-TimeSlot',
-            // requestSchema: {
-            //     body: { // path parameter
-            //         timeSlotId: Types.String({
-            //             description: "timeslot ID",
-            //             required: true, // param values MUST be required
-            //             example: "6663bef329980d420efe331d",
-            //         }),
-            //         movieId: Types.String({
-            //             description: "movie ID",
-            //             required: true, // param values MUST be required
-            //             example: "6663af29862c4159526a5b11",
-            //         }),
-            //     },
-            // },
+        get: {
+            summary: 'retrieve all time slots',
+            description: 'This operation will retrieve all time slot',
+            operationId: 'retrieve-TimeSlots',
             tags: ['TimeSlot'],
             responses: {
-                200: openApi.declareSchema("All movies retrieved successfully!", successfulRetrieveResponse(singleTimeSlotSchema, 'TimeSlot')),
+                200: openApi.declareSchema("All movies retrieved successfully!", successfulUpdateResponse(singleTimeSlotSchema, 'TimeSlot')),
                 400: openApi.declareSchema("An Error Occured", errorSchema)
             }
         }
     }
 }
-//Get all projcts path
-const getAllTimeSlotPath = (openApi) => {
+const retrieveTimeSlotPath = (openApi) => {
+    return {
+        patch: {
+            summary: 'reserve Time Slot for movie',
+            description: 'This operation will reserve time Slot for movie',
+            operationId: 'reserve-TimeSlot',
+            requestSchema: {
+                body: Types.Object({
+                    description: 'TimeSlot id and number of chairs to make the reservation',
+                    timeSlotId: Types.String({
+                        description: "timeslot ID",
+                        required: true,
+                        example: "6663bef329980d420efe331d",
+                    }),
+                    chairs: Types.Integer({
+                        description: "capacity for the movie",
+                        required: true,
+                        example: 5,
+                    }),
+                    example: {
+                        timeSlotId: "6663bef329980d420efe331d", chairs: 5
+                    }
+                }),
+            },
+            tags: ['TimeSlot'],
+            responses: {
+                200: openApi.declareSchema("All movies retrieved successfully!", successfulUpdateResponse(singleTimeSlotSchema, 'TimeSlot')),
+                400: openApi.declareSchema("An Error Occured", errorSchema)
+            }
+        }
+    }
+}
+
+const CheckAvailabilityTimeSlot = (openApi) => {
     return {
         get: {
-            summary: 'Get All Time Slots',
+            summary: 'Get Time Slot to Check Availability',
             description: 'This operation will retrieve all movies with time slot',
             operationId: 'retrieve-TimeSlot',
             tags: ['TimeSlot'],
             requestSchema: {
-                query: { // path parameter
+                description: 'TimeSlot id to get timeslot info',
+                query: {
                     timeSlotId: Types.String({
                         description: "timeslot ID",
-                        required: true, // param values MUST be required
+                        required: true,
                         example: "6663bef329980d420efe331d",
                     }),
                 },
             },
             responses: {
-                200: openApi.declareSchema("All time slot retrieved successfully!", successfulRetrieveResponse(singleTimeSlotSchema, 'TimeSlot')),
+                200: openApi.declareSchema("Get time slot retrieved successfully!", successfulRetrieveResponse(singleTimeSlotSchema, 'TimeSlot')),
                 400: openApi.declareSchema("An Error Occured", errorSchema)
             }
         }
     }
 }
 
-const updateTimeSlotPath = (openApi) => {
+const signMoviePath = (openApi) => {
     return {
         patch: {
-            summary: 'Get All TimeSlots',
+            summary: 'sign time slot for movie',
             description: 'This operation will sign time slot for a Movie',
             operationId: 'update-TimeSlot',
-            // requestSchema: {
-            //     body: { // path parameter
-            //         timeSlotId: Types.String({
-            //             description: "timeslot ID",
-            //             required: true, // param values MUST be required
-            //             example: "6663bef329980d420efe331d",
-            //         }),
-            //         movieId: Types.String({
-            //             description: "movie ID",
-            //             required: true, // param values MUST be required
-            //             example: "6663af29862c4159526a5b11",
-            //         }),
-            //     },
-            // },
+            requestSchema: {
+                body: Types.Object({
+                    description: 'TimeSlot id and movie id to sign movie',
+
+                    timeSlotId: Types.String({
+                        description: "timeslot ID",
+                        required: true,
+                        example: "6663bef329980d420efe331d",
+                    }),
+                    movieId: Types.String({
+                        description: "movie ID",
+                        required: true,
+                        example: "6663af29862c4159526a5b11",
+                    }),
+                    example: {
+                        timeSlotId: "6663bef329980d420efe331d", movieId: "6663af29862c4159526a5b11"
+                    }
+                }),
+            },
             tags: ['TimeSlot'],
             responses: {
-                200: openApi.declareSchema("All movies retrieved successfully!", successfulRetrieveResponse(singleTimeSlotSchema, 'TimeSlot')),
+                200: openApi.declareSchema("Time slot updated successfully!", successfulUpdateResponse(singleTimeSlotSchema, 'TimeSlot')),
                 400: openApi.declareSchema("An Error Occured", errorSchema)
             }
         }
     }
 }
 
-module.exports = { createTimeSlotPath, reserveTimeSlotPath, getAllTimeSlotPath, updateTimeSlotPath }
+module.exports = { createTimeSlotPath, reserveTimeSlotPath, CheckAvailabilityTimeSlot, signMoviePath, retrieveTimeSlotPath }
 
 
 

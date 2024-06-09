@@ -1,11 +1,11 @@
-## get all movies with timeslot availabe
-get http://localhost:8000/api/movie/all
+## get all timeslot 
+GET http://localhost:8000/api/timeSlot/all
+## add movie to time slot  
+PATCH  http://localhost:8000/api/timeSlot/update 
 
-## create movie 
-post http://localhost:8000/api/movie/create 
-{
-    "timeSlot": "2024-06-13 11:20:00"
-}
-
-## retrive movies
-get http://localhost:8000/api/movie/create 
+## create time slot
+POST http://localhost:8000/api/timeSlot/create 
+## reserve time slot 
+PATCH  http://localhost:8000/api/timeSlot/reserve 
+## retrive one time slot 
+GET http://localhost:8000/api/timeSlot/check 

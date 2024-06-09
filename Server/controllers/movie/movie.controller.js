@@ -16,10 +16,22 @@ const createmovie = async (req, res, next) => {
     }
 }
 
-const retrieveAllmovies = async (req, res, next) => {
+const retrieveAllMovies = async (req, res, next) => {
     try {
         const allMovies = await movieModel.find()
         res.json({ message: 'All movies retrieved successfully!', status: 200, docs: allMovies })
+    } catch (error) {
+        next(error)
+    }
+}
+
+const retrieveMovie = async (req, res, next) => {
+    try {
+        const { movieId } = req.query
+        
+        const movie = await movieModel.findById(movieId)
+        
+        res.json({ message: 'movie retrieved successfully!', status: 200, docs: movie })
     } catch (error) {
         next(error)
     }
@@ -68,4 +80,4 @@ const retrieveAllmoviesTimeSlot = async (req, res, next) => {
 }
 
 
-module.exports = { createmovie, retrieveAllmovies, retrieveAllmoviesTimeSlot }
+module.exports = { createmovie, retrieveAllMovies, retrieveAllmoviesTimeSlot, retrieveMovie }

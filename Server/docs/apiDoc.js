@@ -1,8 +1,9 @@
 
 
 const { OpenApi } = require('ts-openapi')
-const { createMoviePath, getAllMoviesPath, getAllMoviesTimeSlotPath } = require('./movie/moviePath')
-const { createTimeSlotPath, reserveTimeSlotPath, getAllTimeSlotPath, updateTimeSlotPath } = require('./timeSlot/timeSlotPath')
+const { createMoviePath, getAllMoviesPath, getAllMoviesTimeSlotPath, getMoviePath } = require('./movie/moviePath')
+const { createTimeSlotPath, reserveTimeSlotPath, CheckAvailabilityTimeSlot, signMoviePath, retrieveTimeSlotPath } = require('./timeSlot/timeSlotPath')
+// const { singleTimeSlotSchema } = require('./timeSlot/timeSlotSchema')
 
 const openApi = new OpenApi(
     "Beta 0.1",
@@ -12,19 +13,22 @@ const openApi = new OpenApi(
 
 //Set the baseURL for the api
 openApi.setServers([
-    { url: "http://localhost:8000" }
+    { url: `http://localhost:${process.env.PORT}` }
 ])
 //movie
 openApi.addPath('/api/movie/create', createMoviePath(openApi), true)
 openApi.addPath('/api/movie/all', getAllMoviesPath(openApi), true)
 openApi.addPath('/api/movie/retrieve', getAllMoviesTimeSlotPath(openApi), true)
+openApi.addPath('/api/movie/show', getMoviePath(openApi), true)
+
 //timeslot
 openApi.addPath('/api/timeSlot/create', createTimeSlotPath(openApi), true)
-openApi.addPath('/api/timeSlot/retrieve', getAllTimeSlotPath(openApi), true)
-openApi.addPath('/api/timeSlot/update', updateTimeSlotPath(openApi), true)
+openApi.addPath('/api/timeSlot/check', CheckAvailabilityTimeSlot(openApi), true)
+openApi.addPath('/api/timeSlot/update', signMoviePath(openApi), true)
 openApi.addPath('/api/timeSlot/reserve', reserveTimeSlotPath(openApi), true)
+openApi.addPath('/api/timeSlot/all', retrieveTimeSlotPath(openApi), true)
+
 
 module.exports = {
     openApiJson: openApi.generateJson()
 }
-// module.exports = options
