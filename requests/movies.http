@@ -3,6 +3,7 @@ GET http://localhost:8000/api/movie/retrieve
 
 ### create movie 
 POST http://localhost:8000/api/movie/create 
-
 ### retrive movies
 GET http://localhost:8000/api/movie/all
+### retrive one movie
+GET http://localhost:8000/api/movie/show
