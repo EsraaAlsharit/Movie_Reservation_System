@@ -48,7 +48,7 @@ const reserveTimeSlot = async (req, res, next) => {
             throw new Error('the number of people you want to reserve for is more than capacity')
 
 
-        const updatedTimeSlot = await timeSlotModel.findByIdAndUpdate(timeSlotId, { capacity: Slot.capacity - chairs }, { new: true })
+        const updatedTimeSlot = await timeSlotModel.findByIdAndUpdate(timeSlotId, { capacity: Slot.capacity - chairs, booked: Slot.booked+chairs }, { new: true })
 
         res.json({ message: 'timeSlot updates successfully!', status: 200, docs: updatedTimeSlot })
     } catch (error) {

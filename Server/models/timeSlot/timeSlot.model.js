@@ -5,24 +5,23 @@ const timeSlotSchema = new mongoose.Schema({
 
     timeSlot: {
         type: Date,
-        required: [true,"timeSlots is required"]
+        required: [true, "timeSlots is required"]
     },
     capacity: {
         type: Number,
         required: true,
         default: 50,
-        
+
     },
     movieId: {
-        type:mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'movie'
     },
-    // availability : {
-    //     type: Boolean,
-    //     required: true,
-    //     default: false
-    // },
-   
+    booked: {
+        type: Number,
+        default: 0,
+    },
+
 
 }, {
     timestamps: true
