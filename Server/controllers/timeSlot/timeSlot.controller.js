@@ -41,8 +41,8 @@ const reserveTimeSlot = async (req, res, next) => {
             throw new Error("can't reserve time slot on the past")
 
 
-        if (Slot.capacity == 0)
-            throw new Error("you need at least one chair")
+        if (chairs == 0)
+            throw new Error("you need at least one chair to make reservation")
 
         if ((Slot.capacity - chairs) <= 0)
             throw new Error('the number of people you want to reserve for is more than capacity')
