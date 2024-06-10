@@ -1,0 +1,40 @@
+https://www.chegg.com/homework-help/questions-and-answers/task-d-scheduling-x-y-add-new-function-timeslot-scheduleafter-timeslot-ts-movie-nextmovie--q42224429
+
+https://www.youtube.com/watch?v=rAuU0sG1br8
+
+manage a movie reservation system.
+
+simple RESTful API 
+
+
+list of available time slots with their capacities
+
+movie
+title 
+times show
+chaeras
+
+Movie Listing Endpoint
+An API endpoint to retrieve a list of available movies
+
+Check Availability
+
+The endpoint should take the movie ID and time slot ID as parameters and return the availability (remaining capacity) for that time slot
+
+7 dates 
+7 times
+
+2h 
+
+11- 4 
+
+11:45
+1:30
+3:00
+04:30
+05:40
+7:10
+9:15
+11:00
+12:20
+
