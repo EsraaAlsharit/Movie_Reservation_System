@@ -20,7 +20,7 @@ const createTimeSlotPath = (openApi) => {
     }
 }
 
-const reserveTimeSlotPath = (openApi) => {
+const retrieveTimeSlotPath = (openApi) => {
     return {
         get: {
             summary: 'retrieve all time slots',
@@ -34,7 +34,7 @@ const reserveTimeSlotPath = (openApi) => {
         }
     }
 }
-const retrieveTimeSlotPath = (openApi) => {
+const reserveTimeSlotPath = (openApi) => {
     return {
         patch: {
             summary: 'reserve Time Slot for movie',

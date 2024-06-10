@@ -8,7 +8,7 @@ const movieBody = Types.Object({
             required: true,
         })
     },
-    example: { title: "M3GAN" },
+    example: { title: "SPLIT" },
 })
 
 const singleMovieSchema = Types.Object({
@@ -19,7 +19,7 @@ const singleMovieSchema = Types.Object({
             description: 'The title of the movie',
         }),
     },
-    example: { _id: Types.Uuid("66652fec7b3eda456080ed4b"), title: "M3GAN" },
+    example: { _id: Types.Uuid("6666409479edaef061065492"), title: "M3GAN" },
 })
 
 module.exports = {
